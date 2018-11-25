@@ -19,15 +19,17 @@ public class Contacto {
 private String nombre;
 private String telefono;
 private String correo;
+final static String ER_TELEFONO="^[6|9]([0|9]{8})$";
+final static String ER_CORREO="^[_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@" + "[a-zA-Z0-9-]+(\\.[a-za-Z0-9-]+)*(\\.[a-zA-Z]{2,4})$";
     //creo setters y getters
     public String getNombre() {
         return nombre;
     }
 
     public void setNombre(String nombre) {
-        if(nombre !=null || nombre==""){
+        if(!nombre.equals(null) || !nombre.equals("")){
         this.nombre = nombre;
-            } throw new IllegalArgumentException("ERROR: El nombre etá vacio");
+            } throw new IllegalArgumentException("ERROR: El nombre está vacio");
     }    
 
     public String getTelefono() {
@@ -35,7 +37,7 @@ private String correo;
     }
 
     public void setTelefono(String telefono) {
-        Pattern p=Pattern.compile("^[6|9]([0|9]{8})$");
+        Pattern p=Pattern.compile(ER_TELEFONO);
         Matcher m=p.matcher(telefono);
           if (m.find()){
             this.telefono = telefono;
@@ -47,7 +49,7 @@ private String correo;
     }
 
     public void setCorreo(String correo) {
-        Pattern p = Pattern.compile("^[_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@" + "[a-zA-Z0-9-]+(\\.[a-za-Z0-9-]+)*(\\.[a-zA-Z]{2,4})$");
+        Pattern p = Pattern.compile(ER_CORREO);
         Matcher m = p.matcher(correo);
         if (m.find()){
         this.correo = correo;
@@ -87,21 +89,26 @@ private String correo;
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Contacto other = (Contacto) obj;
-        if (this.nombre.equalsIgnoreCase(other.nombre)) {
-            return true;
-        }
-        return false;
-    }
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Contacto)) {
+			return false;
+		}
+		Contacto other = (Contacto) obj;
+		if (nombre == null) {
+			if (other.nombre != null) {
+				return false;
+			}
+		} else if (!nombre.equalsIgnoreCase(other.nombre)) {
+			return false;
+		}
+		return true;
+	}
+
 
      
              
