@@ -23,7 +23,7 @@ private String correo;
     }
 
     public void setNombre(String nombre) {
-        if(nombre !=null){
+        if(nombre !=null || nombre==""){
         this.nombre = nombre;
             } throw new IllegalArgumentException("ERROR: El nombre etá vacio");
     }    
@@ -45,12 +45,19 @@ private String correo;
     }
 
     public void setCorreo(String correo) {
-        Pattern p = Pattern.compile("^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@" +"[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$");
+        Pattern p = Pattern.compile("^[_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@" + "[a-zA-Z0-9-]+(\\.[a-za-Z0-9-]+)*(\\.[a-zA-Z]{2,4})$");
         Matcher m = p.matcher(correo);
         if (m.find()){
         this.correo = correo;
             } throw new IllegalArgumentException("ERROR: El mail no tiene el formato correcto");
-    }   
+    }
+    public Contacto(String nombre, String telefono, String correo){
+        
+      setNombre(nombre);
+      setTelefono(telefono);
+      setCorreo(correo);
+        
+    }
 
 
 
