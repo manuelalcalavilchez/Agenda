@@ -5,6 +5,8 @@
  */
 package org.iesalandalus.programacion.agenda;
 
+import java.util.Objects;
+import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,11 +15,11 @@ import java.util.regex.Pattern;
  * @author Manuel
  */
 public class Contacto {
-    
+    //declaro variables
 private String nombre;
 private String telefono;
 private String correo;
-
+    //creo setters y getters
     public String getNombre() {
         return nombre;
     }
@@ -51,6 +53,7 @@ private String correo;
         this.correo = correo;
             } throw new IllegalArgumentException("ERROR: El mail no tiene el formato correcto");
     }
+    //metodo constructor
     public Contacto(String nombre, String telefono, String correo){
         
       setNombre(nombre);
@@ -59,7 +62,50 @@ private String correo;
         
     }
 
+    //método getIniciales
+    
+    public String getIniciales(StringTokenizer iniciales){
+    iniciales = new StringTokenizer(nombre); 
+    while(iniciales.hasMoreTokens()) {
+        System.out.println((iniciales.nextToken().charAt(0)));
+    }
+    return (iniciales.nextToken().charAt(0));
+       }
+    
+    
+    //método toString
+    @Override
+    public String toString() {
+        return "Contacto " + "nombre=" + getIniciales(nombre) + ",{ telefono=" + telefono + ", correo=" + correo + '}';
+    }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Contacto other = (Contacto) obj;
+        if (this.nombre.equalsIgnoreCase(other.nombre)) {
+            return true;
+        }
+        return false;
+    }
+
+     
+             
+     
 
 
 
