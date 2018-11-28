@@ -12,6 +12,12 @@ import javax.naming.OperationNotSupportedException;
  * @author Manuel
  */
 public class Agenda {
+    //declaracion de variables
     static final int MAX_CONTACTOS=5;
-    private int numContactos;
+    private static Contacto [] numContactos=new Contacto[MAX_CONTACTOS];
+     
+     
+    
+    
+    
 }
