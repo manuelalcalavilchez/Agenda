@@ -125,4 +125,31 @@ public class Agenda {
         
         return indice;
     }
+        //metodo para borrar contactos
+         private static void borrar() throws OperationNotSupportedException
+    {
+        String nombre;
+        int i;
+                
+        System.out.println("Introduce el nombre del contacto a buscar");
+        nombre=Entrada.cadena();        
+        
+        //Creamos el contacto con los restantes atributos inventados
+        Contacto contacto=new Contacto(nombre,"950231111" ,"ies@alandaluz.org");
+        
+        i=buscarIndiceCliente(contacto);
+        
+        if (i==-1)
+            throw new OperationNotSupportedException("El contacto a borrar no existe.");
+        else
+            desplazarUnaPosicionHaciaIzquierda(i);
+    }
+
+        private static void desplazarUnaPosicionHaciaIzquierda(int indice) 
+        {
+            for (int i = indice; i < numContactos.length - 1 && numContactos[i] != null; i++) 
+        {
+            numContactos[i] = numContactos[i+1];
+	}
+    }
 }
