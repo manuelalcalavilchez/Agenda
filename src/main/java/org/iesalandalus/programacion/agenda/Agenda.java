@@ -32,7 +32,7 @@ public class Agenda {
     return numContactos[i];
     }
     //metodo añadir contacto
-     public static void anadir(String nombre, String telefono, String correo) //throws OperationNotSupportedException
+     public static void anadir(String nombre, String telefono, String correo) throws OperationNotSupportedException
     {
         int i;
                 
@@ -94,6 +94,35 @@ public class Agenda {
         else
             return false;
     }
-    //
-
+    //Metodo para buscar contacto por nombre
+    public static void buscar() throws OperationNotSupportedException
+    {
+        String nombre;
+        int i;
+        
+        System.out.println("Introduce el nombre del contacto a buscar");
+        nombre=Entrada.cadena();        
+        
+        //Creamos el contacto con los restantes atributos inventados
+        Contacto contacto=new Contacto(nombre,"950231111" ,"ies@alandaluz.org");
+        
+        i=buscarIndiceCliente(contacto);
+        
+        if (i==-1)
+            throw new OperationNotSupportedException("El contacto buscado no se encuentra en la agenda");
+        else
+            System.out.println("El contacto se encuentra en la posición "+i);
+    }
+        private static int buscarIndiceCliente(Contacto contacto)
+    {
+        int indice=-1;
+        
+        for(int i=0;i<numContactos.length;i++)
+        {
+            if (numContactos[i]!=null && numContactos[i].equals(contacto))
+                return indice=i;            
+        }
+        
+        return indice;
+    }
 }
