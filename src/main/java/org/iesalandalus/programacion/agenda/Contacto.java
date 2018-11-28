@@ -16,18 +16,19 @@ import java.util.regex.Pattern;
  */
 public class Contacto {
     //declaro variables
+static final String ER_TELEFONO="[6|9]([0|9]{8})";
+static final String ER_CORREO="[_a-zA-Z0-9-]+(.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(.[a-za-Z0-9-]+)*(.[a-zA-Z]{2,4})";
 private String nombre;
 private String telefono;
 private String correo;
-final static String ER_TELEFONO="^[6|9]([0|9]{8})$";
-final static String ER_CORREO="^[_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@" + "[a-zA-Z0-9-]+(\\.[a-za-Z0-9-]+)*(\\.[a-zA-Z]{2,4})$";
+
     //creo setters y getters
     public String getNombre() {
         return nombre;
     }
 
     public void setNombre(String nombre) {
-        if(!nombre.equals(null) || !nombre.equals("")){
+        if(nombre.length()>0 && nombre!=null){
         this.nombre = nombre;
             } throw new IllegalArgumentException("ERROR: El nombre está vacio");
     }    
@@ -37,9 +38,7 @@ final static String ER_CORREO="^[_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@" + "[a-zA-Z0
     }
 
     public void setTelefono(String telefono) {
-        Pattern p=Pattern.compile(ER_TELEFONO);
-        Matcher m=p.matcher(telefono);
-          if (m.find()){
+        if (telefono.matches(ER_TELEFONO)){
             this.telefono = telefono;
             } throw new IllegalArgumentException("ERROR: El teléfono no tiene el formato correcto");
     }    
@@ -49,11 +48,9 @@ final static String ER_CORREO="^[_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@" + "[a-zA-Z0
     }
 
     public void setCorreo(String correo) {
-        Pattern p = Pattern.compile(ER_CORREO);
-        Matcher m = p.matcher(correo);
-        if (m.find()){
-        this.correo = correo;
-            } throw new IllegalArgumentException("ERROR: El mail no tiene el formato correcto");
+        if (correo.matches(ER_CORREO)){      
+           this.correo = correo;
+        } throw new IllegalArgumentException("ERROR: El mail no tiene el formato correcto");
     }
     //metodo constructor
     public Contacto(String nombre, String telefono, String correo){
@@ -66,12 +63,13 @@ final static String ER_CORREO="^[_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@" + "[a-zA-Z0
 
     //método getIniciales
     
-    public String getIniciales(StringTokenizer iniciales){
-    iniciales = new StringTokenizer(nombre); 
-    while(iniciales.hasMoreTokens()) {
-        System.out.println((iniciales.nextToken().charAt(0)));
+    public String getIniciales(String nombre){
+    String [] iniciales = nombre.split(" ");
+    String letras = null;
+    for (int i=0; i<iniciales.length;i++) {
+        letras = letras + nombre.charAt(0);
     }
-    return (iniciales.nextToken().charAt(0));
+    return letras;
        }
     
     
@@ -103,7 +101,7 @@ final static String ER_CORREO="^[_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@" + "[a-zA-Z0
 			if (other.nombre != null) {
 				return false;
 			}
-		} else if (!nombre.equalsIgnoreCase(other.nombre)) {
+		} else if (!Objects.equals(this.nombre.toUpperCase(), other.nombre.toUpperCase()))  {
 			return false;
 		}
 		return true;
