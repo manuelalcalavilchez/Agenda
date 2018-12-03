@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
  */
 public class Contacto {
     //declaro variables
-static final String ER_TELEFONO="[6|9]([0-9]{8})";
+static final String ER_TELEFONO="[69]([0-9]{8})";
 static final String ER_CORREO="[.a-zA-Z0-9]+@[.a-zA-Z0-9]+.[a-zAZ]{2,4}";
 private String nombre;
 private String telefono;
@@ -29,7 +29,7 @@ private String correo;
 
     public void setNombre(String nombre) {
         if(nombre == null || nombre.equals("")){
-            throw new IllegalArgumentException("El nombre de un contacto no puede ser nulo o vacío.");
+            throw new IllegalArgumentException("El nombre del contacto no puede ser nulo o vacío.");
         } else this.nombre=nombre;
     }    
 
@@ -38,12 +38,12 @@ private String correo;
     }
 
     public void setTelefono(String telefono) {
-        if ( telefono ==null) throw new IllegalArgumentException("El teléfono de un contacto no puede ser nulo o vacío.");
+        if ( telefono ==null) throw new IllegalArgumentException("El teléfono del contacto no puede ser nulo o vacío.");
               
             if (telefono.matches(ER_TELEFONO))
             {
             this.telefono = telefono;
-            }else throw new IllegalArgumentException("El teléfono de un contacto no conicide con un patron válido.");
+            }else throw new IllegalArgumentException("El teléfono del contacto no conicide con un patron válido.");
     }    
 
     public String getCorreo() {
@@ -53,7 +53,7 @@ private String correo;
     public void setCorreo(String correo) {
         if (correo != null && correo.matches(ER_CORREO)) {      
            this.correo = correo;
-        } else throw new IllegalArgumentException("El correo de un contacto no puede ser nulo o vacío.");
+        } else throw new IllegalArgumentException("El correo del contacto no puede ser nulo o vacío.");
     }
     //metodo constructor
     public Contacto(String nombre, String telefono, String correo){
@@ -68,20 +68,28 @@ private String correo;
     
     public String getIniciales(String nombre){
     String [] iniciales = nombre.split(" ");
-    String letras = null;
+    String letras="";
     for (int i=0; i<iniciales.length;i++) {
-        letras = letras + nombre.charAt(0);
+        letras = letras + iniciales[i].charAt(0);
     }
     return letras;
        }
     
     
     //método toString
+
     @Override
     public String toString() {
-        return "Contacto " + "nombre=" + getIniciales(nombre) + ",{ telefono=" + telefono + ", correo=" + correo + '}';
+        return getIniciales(nombre) + "{" + telefono  + " , " + correo + "}" ;
     }
 
+    
+    
+    
+
+    
+    
+    
     @Override
     public int hashCode() {
         int hash = 7;
