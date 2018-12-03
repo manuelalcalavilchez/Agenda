@@ -1,11 +1,15 @@
 package org.iesalandalus.programacion.agenda.modelo;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
+import org.iesalandalus.programacion.agenda.Contacto;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 
 public class ContactoTest {
 	
-/*	private static final String MENSAJE_EXCEPCION = "Debería haber saltado la excepción.";
+	private static final String MENSAJE_EXCEPCION = "Debería haber saltado la excepción.";
 
 	@Test
 	public void constructorValidoTest() {
@@ -147,5 +151,5 @@ public class ContactoTest {
 		assertEquals(contacto1, contacto2);
 		assertEquals(contacto1, contacto3);
 	}
-*/
+
 }
